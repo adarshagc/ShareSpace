@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.adarsha</groupId>
-	<artifactId>ShareSpace</artifactId>
+	<artifactId>sharespace</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ShareSpace</name>
+	<name>sharespace</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>

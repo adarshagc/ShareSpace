@@ -1,9 +1,10 @@
-package com.adarsha.ShareSpace.service;
+package com.adarsha.sharespace.service;
 
-import com.adarsha.ShareSpace.model.Workspace;
-import com.adarsha.ShareSpace.repository.WorkspaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.adarsha.sharespace.model.Workspace;
+import com.adarsha.sharespace.repository.WorkspaceRepository;
 
 import java.time.LocalDateTime;
 import java.util.Collections;

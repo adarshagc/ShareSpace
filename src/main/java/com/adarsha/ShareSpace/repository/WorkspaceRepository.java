@@ -1,7 +1,8 @@
-package com.adarsha.ShareSpace.repository;
+package com.adarsha.sharespace.repository;
 
-import com.adarsha.ShareSpace.model.Workspace;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.adarsha.sharespace.model.Workspace;
 
 import java.util.Optional;
 

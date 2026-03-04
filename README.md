@@ -24,6 +24,13 @@ ShareSpace is a Spring Boot backend application for creating and managing worksp
 -  Layered Architecture
 -  RESTful API's
 
+## Documentation
+
+- Architecture --> (docs/architecture.md)
+- API Documentation --> (docs/api-documentation.md)
+- Database Design --> (docs/database-design.md)
+- Setup Guide --> (docs/setup-guide.md)
+
 ## Author
 
 Adarsha G C

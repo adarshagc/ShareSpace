@@ -1,4 +1,4 @@
-package com.adarsha.ShareSpace.model;
+package com.adarsha.sharespace.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

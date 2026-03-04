@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ShareSpaceApplication {
+public class SharespaceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ShareSpaceApplication.class, args);
+		SpringApplication.run(SharespaceApplication.class, args);
 	}
 
 }

@@ -7,6 +7,7 @@ import com.adarsha.sharespace.model.Workspace;
 import com.adarsha.sharespace.repository.WorkspaceRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 
 @Service
@@ -24,7 +25,7 @@ public class WorkspaceService {
         Workspace workspace = Workspace.builder()
                 .code(code)
                 .textContent("")
-                .files(Collections.emptyList())
+                .files(new ArrayList<>())
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -34,6 +35,16 @@ public class WorkspaceService {
     public Workspace getWorkspace(String code) {
         return workspaceRepository.findByCode(code)
                 .orElseThrow(() -> new RuntimeException("WorkSpace not found"));
+    }
+
+    public Workspace updateText(String code, String newText) {
+
+        Workspace workspace = workspaceRepository.findByCode(code)
+                .orElseThrow(() -> new RuntimeException("Workspace not found"));
+        workspace.setTextContent(newText);
+
+        return workspaceRepository.save(workspace);
+        
     }
     
 }

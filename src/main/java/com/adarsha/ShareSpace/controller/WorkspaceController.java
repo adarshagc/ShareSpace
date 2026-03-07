@@ -3,9 +3,9 @@ package com.adarsha.sharespace.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import com.adarsha.sharespace.model.Workspace;
 import com.adarsha.sharespace.service.WorkspaceService;
 import com.adarsha.sharespace.dto.TextUpdateRequest;
+import com.adarsha.sharespace.model.Workspace;
 
 @RestController
 @RequestMapping("/api/workspace")

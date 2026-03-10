@@ -2,6 +2,7 @@ package com.adarsha.sharespace.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.adarsha.sharespace.service.WorkspaceService;
 import com.adarsha.sharespace.dto.TextUpdateRequest;
@@ -31,6 +32,14 @@ public class WorkspaceController {
     public Workspace updateText(@PathVariable String code,
                                 @RequestBody TextUpdateRequest request) {
         return workspaceService.updateText(code, request.getTextContent());
+    }
+
+    //
+
+    @PostMapping("/{code}/upload")
+    public Workspace uploadFile(@PathVariable String code, @RequestParam("file") MultipartFile file) throws Exception {
+
+        return workspaceService.uploadFile(code, file);
     }
     
 }

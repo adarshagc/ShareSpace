@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.adarsha.sharespace.service.WorkspaceService;
 import com.adarsha.sharespace.dto.TextUpdateRequest;
+import com.adarsha.sharespace.dto.WorkspaceResponse;
 import com.adarsha.sharespace.model.Workspace;
 
 import java.nio.file.Path;
@@ -27,12 +28,12 @@ public class WorkspaceController {
 
         
     @PostMapping
-    public Workspace createWorkspace(@RequestParam String code) {    
-        return workspaceService.createWorkspace(code);
+    public WorkspaceResponse createWorkspace() {    
+        return workspaceService.createWorkspaceResponse();
     }
 
     @GetMapping("/{code}")
-    public Workspace getWorkspace(@PathVariable String code) {
+    public WorkspaceResponse getWorkspace(@PathVariable String code) {
         return workspaceService.getWorkspace(code);
     }
 
@@ -64,9 +65,11 @@ public class WorkspaceController {
                 .body(resource);
 
     }
-    @PostMapping
-    public Workspace creatWorkspace() {
-        return workspaceService.createWorkspace();
+
+    @DeleteMapping("/{code}/files/{filename}")
+    public Workspace deleteFile(@PathVariable String code,
+                                @PathVariable String filename) throws Exception {
+        
+        return workspaceService.deleteFile(code, filename);
     }
-    
 }

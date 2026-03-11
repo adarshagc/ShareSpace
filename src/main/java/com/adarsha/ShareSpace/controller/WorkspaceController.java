@@ -64,5 +64,9 @@ public class WorkspaceController {
                 .body(resource);
 
     }
+    @PostMapping
+    public Workspace creatWorkspace() {
+        return workspaceService.createWorkspace();
+    }
     
 }

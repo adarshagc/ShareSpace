@@ -12,6 +12,7 @@ import java.nio.file.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 @Service
@@ -70,6 +71,20 @@ public class WorkspaceService {
 
         workspace.getFiles().add(fileMeta);
 
+        return workspaceRepository.save(workspace);
+    }
+
+    public Workspace createWorkspace() {
+
+        String code = UUID.randomUUID().toString().substring(0, 6);
+
+        Workspace workspace = Workspace.builder()
+                .code(code)
+                .textContent("")
+                .files(new ArrayList<>())
+                .createdAt(LocalDateTime.now())
+                .build();
+        
         return workspaceRepository.save(workspace);
     }
     

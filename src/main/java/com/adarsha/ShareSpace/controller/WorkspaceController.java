@@ -21,7 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @RestController
-@RequestMapping("/api/workspace")
+@RequestMapping("/api/v1/workspace")
 @RequiredArgsConstructor
 @CrossOrigin
 @Tag(name = "Workspace API", description = "Operation related to workspace sharing")
@@ -30,11 +30,15 @@ public class WorkspaceController {
 
     private final WorkspaceService workspaceService;
 
+    //Create Workspace
+
     @Operation(summary = "Create a new workspace") 
     @PostMapping
     public WorkspaceResponse createWorkspace() {    
         return workspaceService.createWorkspaceResponse();
     }
+
+    //Get Workspace
 
     @Operation(summary = "Get workspace by code")
     @GetMapping("/{code}")
@@ -42,12 +46,16 @@ public class WorkspaceController {
         return workspaceService.getWorkspace(code);
     }
 
+    //Update Text
+
     @Operation(summary = "Update workspace text content")
     @PutMapping("/{code}/text")
-    public Workspace updateText(@PathVariable String code,
+    public WorkspaceResponse updateText(@PathVariable String code,
                                 @RequestBody TextUpdateRequest request) {
         return workspaceService.updateText(code, request.getTextContent());
     }
+
+    //Upload File
 
     @Operation(summary = "Upload a file to workspace")
     @PostMapping("/{code}/upload")
@@ -55,6 +63,8 @@ public class WorkspaceController {
 
         return workspaceService.uploadFile(code, file);
     }
+
+    //Download File
 
     @Operation(summary = "Download a file from workspace")
     @GetMapping("/files/{filename}")
@@ -72,6 +82,8 @@ public class WorkspaceController {
 
     }
 
+    //Delete File
+    
     @Operation(summary = "Delete a file from workspace")
     @DeleteMapping("/{code}/files/{filename}")
     public Workspace deleteFile(@PathVariable String code,

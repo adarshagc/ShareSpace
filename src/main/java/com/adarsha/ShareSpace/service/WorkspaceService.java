@@ -54,13 +54,16 @@ public class WorkspaceService {
         return mapToResponse(workspace);
     }
 
-    public Workspace updateText(String code, String newText) {
+    public WorkspaceResponse updateText(String code, String newText) {
 
         Workspace workspace = workspaceRepository.findByCode(code)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Workspace not found"));
+        
         workspace.setTextContent(newText);
 
-        return workspaceRepository.save(workspace);
+        workspaceRepository.save(workspace);
+
+        return mapToResponse(workspace);
         
     }
 

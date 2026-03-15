@@ -16,7 +16,6 @@ import java.nio.file.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.UUID;
 
 
 @Service
@@ -27,8 +26,8 @@ public class WorkspaceService {
 
     public Workspace createWorkspace(String code) {
 
-        if(workspaceRepository.existsByCode(code)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Workspace code already exists!");
+        if(workspaceRepository.findByCode(code).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Workspace code already exists!");
         }
 
         Workspace workspace = Workspace.builder()
@@ -41,17 +40,31 @@ public class WorkspaceService {
         return workspaceRepository.save(workspace);
     }
 
-    public WorkspaceResponse createWorkspaceResponse() {
-        Workspace workspace = createWorkspace();
+    public WorkspaceResponse createWorkspaceResponse(String code) {
+        Workspace workspace = createWorkspace(code);
 
         return mapToResponse(workspace);
     }
 
-    public WorkspaceResponse getWorkspace(String code) {
-        Workspace workspace = workspaceRepository.findByCode(code)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Workspace not found"));
+    public WorkspaceResponse getWorkspaceByCode(String code) {
+        
+        Optional<Workspace> workspaceOpt = workspaceRepository.findByCode(code);
 
-        return mapToResponse(workspace);
+        if(workspaceOpt.isEmpty()) {
+
+            Workspace newWorkspace = Workspace.builder()
+                    .code(code)
+                    .textContent("")
+                    .files(new ArrayList<>())
+                    .createdAt(LocalDateTime.now())
+                    .build();
+
+            workspaceRepository.save(newWorkspace);
+
+            return mapToResponse(newWorkspace);
+        }
+
+        return mapToResponse(workspaceOpt.get());
     }
 
     public WorkspaceResponse updateText(String code, String newText) {

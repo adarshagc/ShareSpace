@@ -33,9 +33,9 @@ public class WorkspaceController {
     //Create Workspace
 
     @Operation(summary = "Create a new workspace") 
-    @PostMapping
-    public WorkspaceResponse createWorkspace() {    
-        return workspaceService.createWorkspaceResponse();
+    @PostMapping("/{code}")
+    public WorkspaceResponse createWorkspace(@PathVariable String code) {    
+        return workspaceService.createWorkspaceResponse(code);
     }
 
     //Get Workspace
@@ -43,15 +43,17 @@ public class WorkspaceController {
     @Operation(summary = "Get workspace by code")
     @GetMapping("/{code}")
     public WorkspaceResponse getWorkspace(@PathVariable String code) {
-        return workspaceService.getWorkspace(code);
+        return workspaceService.getWorkspaceByCode(code);
     }
 
     //Update Text
 
     @Operation(summary = "Update workspace text content")
     @PutMapping("/{code}/text")
-    public WorkspaceResponse updateText(@PathVariable String code,
-                                @RequestBody TextUpdateRequest request) {
+    public WorkspaceResponse updateText(
+            @PathVariable String code,
+            @RequestBody TextUpdateRequest request) {
+                
         return workspaceService.updateText(code, request.getTextContent());
     }
 
